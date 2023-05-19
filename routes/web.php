@@ -22,6 +22,7 @@ Route::middleware(['auth', 'organizer'])->name('organizer.')->prefix('organizer'
 
     Route::get('/profile', [\App\Http\Controllers\Organizer\ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [\App\Http\Controllers\Organizer\ProfileController::class, 'update'])->name('profile.update');
+    Route::patch('/profile/organizer', [\App\Http\Controllers\Organizer\ProfileController::class, 'updateOrganizer'])->name('profile.updateOrganizer');
     Route::delete('/profile', [\App\Http\Controllers\Organizer\ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::get('/', [\App\Http\Controllers\Organizer\OrganizerController::class, 'index'])->name('index');
