@@ -20,6 +20,7 @@ class ProfileController extends Controller
     {
         return view('organizer.profile.edit', [
             'user' => $request->user(),
+            'organizer' => $request->user()->organizer,
         ]);
     }
 
