@@ -12,11 +12,21 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        $user = \App\Models\User::factory()->create([
+            'name' => 'Dennis Schwerdt',
+            'email' => 'ds@s-vtec.de',
+            'password' => bcrypt('ChangeMe2023#'),
+        ]);
+        $user->organizer()->create([
+            'user_id' => $user->id,
+            'name' => 'Schwerdt Veranstaltungstechnik',
+            'address' => 'Tulpenweg 6',
+            'zip' => '41517',
+            'city' => 'Grevenbroich',
+            'country' => 'Deutschland',
+            'email' => 'info@s-vtec.de',
+            'phone' => '+49 2181 819 99 99',
+            'website' => 'https://www.s-vtec.de',
+        ]);
     }
 }
