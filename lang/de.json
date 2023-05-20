@@ -1,0 +1,22 @@
+{
+    "Venues": "Locations",
+    "Venue": "Location",
+    "Add Venue": "Location hinzufügen",
+    "Save": "Speichern",
+    "Delete": "Löschen",
+    "Edit": "Bearbeiten",
+    "Events": "Veranstaltungen",
+    "Event": "Veranstaltung",
+    "Add Event": "Veranstaltung hinzufügen",
+    "Choose Category": "Kategorie wählen",
+    "Choose Sub-Category": "Unterkategorie wählen",
+    "Title": "Titel",
+    "Description": "Beschreibung",
+    "Category" : "Kategorie",
+    "Categories" : "Kategorien",
+    "Sub-Category" : "Unterkategorie",
+    "Sub-Categories" : "Unterkategorien",
+    "Entry" : "Einlass",
+    "Start" : "Beginn",
+    "End" : "Ende"
+}

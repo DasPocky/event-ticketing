@@ -22,10 +22,10 @@
 <body class="bg-white text-gray-600 work-sans leading-normal text-base tracking-normal">
 
 <!--Nav-->
-<nav id="header" class="w-full z-30 top-0 py-1">
+<nav id="header" class="w-full z-30 top-0 py-1" x-data="{ open: false }">
     <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 px-6 py-3">
 
-        <label for="menu-toggle" class="cursor-pointer md:hidden block">
+        <label for="menu-toggle" class="cursor-pointer md:hidden block" @click="open = !open">
             <svg class="fill-current text-gray-900" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
                 <title>menu</title>
                 <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"></path>
@@ -33,7 +33,7 @@
         </label>
         <input class="hidden" type="checkbox" id="menu-toggle" />
 
-        <div class="hidden md:flex md:items-center md:w-auto w-full order-3 md:order-1" id="menu">
+        <div class="hidden md:flex md:items-center md:w-auto w-full order-3 md:order-1" id="menu" :class="{ 'block': open, 'hidden': !open }">
             <nav>
                 <ul class="md:flex items-center justify-between text-base text-gray-700 pt-4 md:pt-0">
                     <li><a class="inline-block no-underline hover:text-black hover:underline py-2 px-4" href="#">Shop</a></li>
@@ -65,7 +65,7 @@
                                 <path d="M224 256A128 128 0 1 1 224 0a128 128 0 1 1 0 256zM209.1 359.2l-18.6-31c-6.4-10.7 1.3-24.2 13.7-24.2H224h19.7c12.4 0 20.1 13.6 13.7 24.2l-18.6 31 33.4 123.9 36-146.9c2-8.1 9.8-13.4 17.9-11.3c70.1 17.6 121.9 81 121.9 156.4c0 17-13.8 30.7-30.7 30.7H285.5c-2.1 0-4-.4-5.8-1.1l.3 1.1H168l.3-1.1c-1.8 .7-3.8 1.1-5.8 1.1H30.7C13.8 512 0 498.2 0 481.3c0-75.5 51.9-138.9 121.9-156.4c8.1-2 15.9 3.3 17.9 11.3l36 146.9 33.4-123.9z"/>
                             </svg>
                             <!-- Benutzer Name -->
-                            <p class="whitespace-nowrap overflow-ellipsis overflow-hidden mr-2 border-b border-gray-800 pb-1">{{ auth()->user()->name}}</p>
+                            <p class="whitespace-nowrap overflow-ellipsis overflow-hidden mr-2 border-b border-gray-800 pb-1 md:block hidden">{{ auth()->user()->name}}</p>
                         </a>
                     @else
                         <a href="{{ route('dashboard.profile.edit') }}" class="flex flex-row">
@@ -74,7 +74,7 @@
                                 <path d="M304 128a80 80 0 1 0 -160 0 80 80 0 1 0 160 0zM96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM49.3 464H398.7c-8.9-63.3-63.3-112-129-112H178.3c-65.7 0-120.1 48.7-129 112zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3z"/>
                             </svg>
                             <!-- Benutzer Name -->
-                            <p class="whitespace-nowrap overflow-ellipsis overflow-hidden mr-2 border-b border-gray-800 pb-1">{{ auth()->user()->name}}</p>
+                            <p class="whitespace-nowrap overflow-ellipsis overflow-hidden mr-2 border-b border-gray-800 pb-1 md:block hidden">{{ auth()->user()->name}}</p>
                         </a>
                     @endif
 
@@ -88,7 +88,7 @@
                                 <!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
                                 <path d="M0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm320 96c0-26.9-16.5-49.9-40-59.3V88c0-13.3-10.7-24-24-24s-24 10.7-24 24V292.7c-23.5 9.5-40 32.5-40 59.3c0 35.3 28.7 64 64 64s64-28.7 64-64zM144 176a32 32 0 1 0 0-64 32 32 0 1 0 0 64zm-16 80a32 32 0 1 0 -64 0 32 32 0 1 0 64 0zm288 32a32 32 0 1 0 0-64 32 32 0 1 0 0 64zM400 144a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"/>
                             </svg>
-                            <p class="whitespace-nowrap overflow-ellipsis overflow-hidden mr-2 border-b border-gray-800 pb-1">Dashboard</p>
+                            <p class="whitespace-nowrap overflow-ellipsis overflow-hidden mr-2 border-b border-gray-800 pb-1 md:block hidden">Dashboard</p>
                         </a>
                     @else
                         <a href="{{ route('dashboard.index') }}" class="flex flex-row">
@@ -96,7 +96,7 @@
                                 <!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
                                 <path d="M0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm320 96c0-26.9-16.5-49.9-40-59.3V88c0-13.3-10.7-24-24-24s-24 10.7-24 24V292.7c-23.5 9.5-40 32.5-40 59.3c0 35.3 28.7 64 64 64s64-28.7 64-64zM144 176a32 32 0 1 0 0-64 32 32 0 1 0 0 64zm-16 80a32 32 0 1 0 -64 0 32 32 0 1 0 64 0zm288 32a32 32 0 1 0 0-64 32 32 0 1 0 0 64zM400 144a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"/>
                             </svg>
-                            <p class="whitespace-nowrap overflow-ellipsis overflow-hidden mr-2 border-b border-gray-800 pb-1">Dashboard</p>
+                            <p class="whitespace-nowrap overflow-ellipsis overflow-hidden mr-2 border-b border-gray-800 pb-1 md:block hidden">Dashboard</p>
                         </a>
                     @endif
 
@@ -112,7 +112,7 @@
                                 <!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
                                 <path d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 192 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l210.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128zM160 96c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 32C43 32 0 75 0 128L0 384c0 53 43 96 96 96l64 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l64 0z"/>
                             </svg>
-                            <p class="whitespace-nowrap overflow-ellipsis overflow-hidden mr-2 border-b border-gray-800 pb-1">Logout</p>
+                            <p class="whitespace-nowrap overflow-ellipsis overflow-hidden mr-2 border-b border-gray-800 pb-1 md:block hidden">Logout</p>
                         </button>
                     </form>
                 </div>
@@ -124,7 +124,7 @@
                             <!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
                             <path d="M352 96l64 0c17.7 0 32 14.3 32 32l0 256c0 17.7-14.3 32-32 32l-64 0c-17.7 0-32 14.3-32 32s14.3 32 32 32l64 0c53 0 96-43 96-96l0-256c0-53-43-96-96-96l-64 0c-17.7 0-32 14.3-32 32s14.3 32 32 32zm-9.4 182.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L242.7 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l210.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128z"/>
                         </svg>
-                        <p class="whitespace-nowrap overflow-ellipsis overflow-hidden mr-2 border-b border-gray-800 pb-1">Login</p>
+                        <p class="whitespace-nowrap overflow-ellipsis overflow-hidden mr-2 border-b border-gray-800 pb-1 md:block hidden">Login</p>
                     </a>
                 </div>
 
@@ -138,7 +138,7 @@
                             <!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
                             <path d="M96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3zM504 312V248H440c-13.3 0-24-10.7-24-24s10.7-24 24-24h64V136c0-13.3 10.7-24 24-24s24 10.7 24 24v64h64c13.3 0 24 10.7 24 24s-10.7 24-24 24H552v64c0 13.3-10.7 24-24 24s-24-10.7-24-24z"/>
                         </svg>
-                        <p class="whitespace-nowrap overflow-ellipsis overflow-hidden mr-2 border-b border-gray-800 pb-1">Register</p>
+                        <p class="whitespace-nowrap overflow-ellipsis overflow-hidden mr-2 border-b border-gray-800 pb-1 md:block hidden">Register</p>
                     </a>
                 </div>
 

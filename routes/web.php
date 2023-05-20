@@ -13,9 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-})->name('home');
+// Route zum Controller "HomeController"
+Route::get('/', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::middleware(['auth', 'organizer'])->name('organizer.')->prefix('organizer')->group(function () {
     // Hier werden die Routen für den Organizer definiert
@@ -26,6 +25,14 @@ Route::middleware(['auth', 'organizer'])->name('organizer.')->prefix('organizer'
     Route::delete('/profile', [\App\Http\Controllers\Organizer\ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::get('/', [\App\Http\Controllers\Organizer\OrganizerController::class, 'index'])->name('index');
+
+    // Füge die Resource Venue hinzu
+    Route::resource('venues', \App\Http\Controllers\Organizer\VenueController::class);
+
+    // Füge eine Route zur View "Views/Events/index.blade.php" hinzu
+
+    Route::get('/events', [\App\Http\Controllers\Organizer\EventController::class, 'index'])->name('events.index');
+
 
 });
 

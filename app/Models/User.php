@@ -52,4 +52,14 @@ class User extends Authenticatable
     {
         return $this->organizer != null;
     }
+
+    public function venues()
+    {
+        return $this->hasMany(Venue::class);
+    }
+
+    public function events()
+    {
+        return $this->hasMany(Event::class);
+    }
 }

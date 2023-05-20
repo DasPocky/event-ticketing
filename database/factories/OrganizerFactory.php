@@ -23,6 +23,7 @@ class OrganizerFactory extends Factory
             'zip' => $this->faker->postcode,
             'city' => $this->faker->city,
             'country' => $this->faker->country,
+            'image' => null,
             'email' => $this->faker->companyEmail,
             'phone' => $this->faker->phoneNumber,
             'website' => $this->faker->url,
