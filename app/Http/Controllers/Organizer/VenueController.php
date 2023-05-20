@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Organizer;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\Organizer\Venue\StoreVenueRequest;
+use App\Http\Requests\Organizer\Venue\UpdateVenueRequest;
 use App\Models\Venue;
+use Illuminate\Support\Facades\Storage;
 
 class VenueController extends Controller
 {
@@ -19,24 +21,29 @@ class VenueController extends Controller
         return view('organizer.venues.create');
     }
 
-    public function store(Request $request)
+    public function store(StoreVenueRequest $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'address' => 'required',
-            'zip' => 'required',
-            'city' => 'required',
-            'country' => 'required',
-            'contact_name' => 'required',
-            'contact_phone' => 'required',
-            'contact_email' => 'required',
-            'notes' => 'required'
+
+        // Speichern des Bildes im Storage, Vergabe eines Hash-Namens und Abrufen des Pfades
+        $imageName = $request->file('image')->hashName();
+        $imagePath = $request->file('image')->storeAs('images/venues', $imageName, 'public');
+
+        // Speichern des Veranstaltungsorts in der Datenbank
+        $venue = auth()->user()->venues()->create([
+            'name' => $request->name,
+            'address' => $request->address,
+            'zip' => $request->zip,
+            'city' => $request->city,
+            'country' => $request->country,
+            'image' => $imagePath,
+            'contact_name' => $request->contact_name,
+            'contact_phone' => $request->contact_phone,
+            'contact_email' => $request->contact_email,
+            'notes' => $request->notes
         ]);
 
-        $venue = auth()->user()->venues()->create($request->all());
-
-        return redirect()->route('organizer.venues.index')
-            ->with('success', 'Venue successfully created.');
+        // Zurück zur Veranstaltungsort-Übersicht mit Erfolgsmeldung
+        return redirect()->route('organizer.venues.index')->with('success', 'Venue erfolgreich erstellt.');
     }
 
     public function edit(Venue $venue)
@@ -44,24 +51,37 @@ class VenueController extends Controller
         return view('organizer.venues.edit', compact('venue'));
     }
 
-    public function update(Request $request, Venue $venue)
+    public function update(UpdateVenueRequest $request, Venue $venue)
     {
-        $request->validate([
-            'name' => 'required',
-            'address' => 'required',
-            'zip' => 'required',
-            'city' => 'required',
-            'country' => 'required',
-            'contact_name' => 'required',
-            'contact_phone' => 'required',
-            'contact_email' => 'required',
-            'notes' => 'required'
+        // Prüfen, ob ein neues Bild hochgeladen wurde
+        if ($request->hasFile('image')) {
+            // Altes Bild löschen
+            Storage::delete('public/' . $venue->image);
+
+            // Neues Bild speichern...
+            $imageName = $request->file('image')->hashName();
+            $imagePath = $request->file('image')->storeAs('images/venues', $imageName, 'public');
+        } else {
+            // Aktuelles Bild beibehalten
+            $imagePath = $venue->image;
+        }
+
+        // Aktualisieren des Veranstaltungsorts in der Datenbank
+        $venue->update([
+            'name' => $request->name,
+            'address' => $request->address,
+            'zip' => $request->zip,
+            'city' => $request->city,
+            'country' => $request->country,
+            'image' => $imagePath,
+            'contact_name' => $request->contact_name,
+            'contact_phone' => $request->contact_phone,
+            'contact_email' => $request->contact_email,
+            'notes' => $request->notes
         ]);
 
-        $venue->update($request->all());
-
-        return redirect()->route('organizer.venues.index')
-            ->with('success', 'Venue successfully updated.');
+        // Zurück zur Veranstaltungsort-Übersicht mit Erfolgsmeldung
+        return redirect()->route('organizer.venues.index')->with('success', 'Venue erfolgreich aktualisiert.');
     }
 
     public function destroy(Venue $venue)

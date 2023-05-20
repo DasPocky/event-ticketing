@@ -21,9 +21,9 @@ return new class extends Migration
 
             $table->string('title');
             $table->text('description');
-            $table->dateTime('entry_datetime');
+            $table->dateTime('entry_datetime')->nullable();
             $table->dateTime('start_datetime');
-            $table->dateTime('end_datetime');
+            $table->dateTime('end_datetime')->nullable();
             $table->boolean('status')->default(0);
             $table->string('image');
             $table->string('website');

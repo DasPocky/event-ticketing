@@ -30,8 +30,8 @@ Route::middleware(['auth', 'organizer'])->name('organizer.')->prefix('organizer'
     Route::resource('venues', \App\Http\Controllers\Organizer\VenueController::class);
 
     // Füge eine Route zur View "Views/Events/index.blade.php" hinzu
+    Route::resource('events', \App\Http\Controllers\Organizer\EventController::class);
 
-    Route::get('/events', [\App\Http\Controllers\Organizer\EventController::class, 'index'])->name('events.index');
 
 
 });

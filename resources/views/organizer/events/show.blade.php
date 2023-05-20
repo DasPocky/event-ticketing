@@ -2,7 +2,7 @@
 <x-organizer-layout>
     <x-slot name="header">
         <h2 class="text-lg font-semibold tracking-widest text-gray-500 uppercase rounded-lg dark:text-white focus:outline-none focus:shadow-outline">
-            {{ __('Venues') }}
+            {{ __('Events') }}
         </h2>
     </x-slot>
 
@@ -11,12 +11,12 @@
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
             <!-- Card Content -->
             <div class="bg-gray-100 overflow-hidden shadow-xl sm:rounded-lg p-6">
-                <!-- Venue Name -->
-                <h2 class="text-lg font-semibold tracking-widest text-gray-800 mb-2">{{$venue->name}}</h2>
+                <!-- Event Name -->
+                <h2 class="text-lg font-semibold tracking-widest text-gray-800 mb-2">{{$event->title}}</h2>
                 <div class="flex flex-row">
                     <div class="w-1/3">
                         <div class="h-full">
-                            <img src="{{ asset('storage/' . $venue->image) }}" alt="{{$venue->name}}" class="rounded-lg shadow-md">
+                            <img src="{{ asset('storage/' . $event->image) }}" alt="{{$event->title}}" class="rounded-lg shadow-md">
                         </div>
                     </div>
                     <div class="text-gray-800 text-lg  flex flex-col w-1/3 justify-between ml-5">
@@ -28,9 +28,9 @@
                                 </svg>
                             </div>
                             <div>
-                                <div>{{$venue->address}}</div>
-                                <div>{{$venue->zip}} {{$venue->city}}</div>
-                                <div>{{$venue->country}}</div>
+                                <div>{{$event->venue->address}}</div>
+                                <div>{{$event->venue->zip}} {{$event->venue->city}}</div>
+                                <div>{{$event->venue->country}}</div>
                             </div>
                         </div>
                         <div class="text-gray-800 text-lg  flex flex-row">
@@ -41,22 +41,22 @@
                                 </svg>
                             </div>
                             <div>
-                                <div>{{$venue->contact_name}}</div>
-                                <div>{{$venue->contact_phone}}</div>
-                                <div>{{$venue->contact_email}}</div>
+                                <div>{{$event->venue->contact_name}}</div>
+                                <div>{{$event->venue->contact_phone}}</div>
+                                <div>{{$event->venue->contact_email}}</div>
                             </div>
                         </div>
                     </div>
                     <div class="text-gray-800 text-lg w-1/3">
                         <div class="flex flex-col justify-between h-full">
                             <div class="text-justify">
-                                {{ $venue->notes }}
+                                {{ $event->description }}
                             </div>
                             <div class="flex flex-row justify-between">
-                                <x-primary-button-link href="{{route('organizer.venues.edit', $venue)}}">
+                                <x-primary-button-link href="{{route('organizer.events.edit', $event)}}">
                                     {{ __('Edit') }}
                                 </x-primary-button-link>
-                                <form class="inline-block" action="{{route('organizer.venues.destroy', $venue)}}" method="POST" onsubmit="return confirm('Wirklich löschen?')">
+                                <form class="inline-block" action="{{route('organizer.events.destroy', $event)}}" method="POST" onsubmit="return confirm('Wirklich löschen?')">
                                     @csrf
                                     @method('DELETE')
                                     <x-primary-button>

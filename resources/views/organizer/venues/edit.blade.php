@@ -8,7 +8,7 @@
     <div class="p-10">
         <div class="max-w-7xl mx-auto">
             <div class="shadow-md sm:rounded-lg">
-                <form method="POST" action="{{ route('organizer.venues.update', $venue->id) }}">
+                <form method="POST" action="{{ route('organizer.venues.update', $venue->id) }}" enctype="multipart/form-data">
                     @csrf
 
                     @method('PUT')
@@ -48,6 +48,17 @@
                         <x-input-error :messages="$errors->get('country')" class="mt-2" />
                     </div>
 
+                    <!-- Image -->
+                    <div class="px-6 py-4">
+                        <x-input-label for="image" :value="__('Current Image')" />
+
+                        <img src="{{ asset('storage/' . $venue->image) }}" alt="{{ $venue->title }}" class="mb-4 w-20 h-20"/>
+
+                        <x-input-label for="image" :value="__('New Image')" />
+                        <input id="image" class="block mt-1 w-full" type="file" name="image"/>
+                        <x-input-error :messages="$errors->get('image')" class="mt-2" />
+                    </div>
+
                     <!-- contact_name -->
                     <div class="px-6 py-4">
                         <x-input-label for="contact_name" :value="__('Contact Name')" />
@@ -72,14 +83,7 @@
                     <!-- notes -->
                     <div class="px-6 py-4">
                         <x-input-label for="notes" :value="__('Notes')" />
-                        <x-text-area
-                            id="notes"
-                            class="block mt-1 w-full"
-                            type="text"
-                            name="notes"
-                            :content="$venue->notes"
-                            required
-                        />
+                        <textarea  id="notes" class="block mt-1 w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm" name="notes" autofocus>{{ $venue->notes }}</textarea>
                         <x-input-error :messages="$errors->get('notes')" class="mt-2" />
                     </div>
 

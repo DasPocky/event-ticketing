@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Category;
-use App\Models\Event;
 use App\Models\SubCategory;
 use App\Models\Tag;
 use Illuminate\Database\Seeder;
@@ -31,11 +30,6 @@ class DatabaseSeeder extends Seeder
             'email' => 'info@s-vtec.de',
             'phone' => '+49 2181 819 99 99',
             'website' => 'https://www.s-vtec.de',
-        ]);
-
-        $venues = \App\Models\Venue::factory()->count(5)->create([
-            'user_id' => $user->id,
-            'image' => 'https://picsum.photos/1920/1080',
         ]);
 
         $eventCategories = [
@@ -94,42 +88,6 @@ class DatabaseSeeder extends Seeder
                 Tag::create(['name' => $tagName]);
             }
         }
-
-        // Füge ein Events hinzu mit bestimmten Daten
-        $event = Event::create([
-            'user_id' => $user->id,
-            'category_id' => $category->id,
-            'sub_category_id' => $category->subCategories()->first()->id,
-            'venue_id' => $venues->first()->id,
-            'title' => 'Führung durch den Kölner Dom',
-            'description' => 'Das ist eine echte Attraktion',
-            'entry_datetime' => now(),
-            'start_datetime' => now()->addDays(1),
-            'end_datetime' => now()->addDays(1)->addHours(2),
-            'status' => '1',
-            'image' => 'https://picsum.photos/1920/1080',
-            'website' => 'https://www.s-vtec.de',
-        ]);
-
-        $event->tags()->attach(Tag::inRandomOrder()->limit(3)->get());
-
-        // Füge ein Events hinzu mit bestimmten Daten
-        $event = Event::create([
-            'user_id' => $user->id,
-            'category_id' => $category->id,
-            'sub_category_id' => $category->subCategories()->first()->id,
-            'venue_id' => $venues->first()->id,
-            'title' => 'Höhner - Live in Concert',
-            'description' => 'Live Konzert der Höhner',
-            'entry_datetime' => now(),
-            'start_datetime' => now()->addDays(1),
-            'end_datetime' => now()->addDays(1)->addHours(2),
-            'status' => '1',
-            'image' => 'https://picsum.photos/1920/1080',
-            'website' => 'https://www.s-vtec.de',
-        ]);
-
-        $event->tags()->attach(Tag::inRandomOrder()->limit(3)->get());
 
     }
 }
