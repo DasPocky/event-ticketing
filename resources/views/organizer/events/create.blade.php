@@ -20,7 +20,6 @@
             @endif
             <form method="POST" action="{{ route('organizer.events.store')}}" enctype="multipart/form-data">
                 @csrf
-                @method('PUT')
                 <!-- Venue -->
                 <div class="px-6 py-4">
                     <x-input-label for="title" :value="__('Venue')" />

@@ -21,6 +21,7 @@
         "nunomaduro/larastan": "^2.0",
         "pestphp/pest": "^2.0",
         "pestphp/pest-plugin-laravel": "^2.0",
+        "smknstd/fakerphp-picsum-images": "^1.0",
         "spatie/laravel-ignition": "^2.0"
     },
     "autoload": {

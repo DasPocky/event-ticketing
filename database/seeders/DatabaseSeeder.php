@@ -6,22 +6,27 @@ namespace Database\Seeders;
 use App\Models\Category;
 use App\Models\SubCategory;
 use App\Models\Tag;
+use App\Models\Venue;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Storage;
+use Exception;
 
 class DatabaseSeeder extends Seeder
 {
+
     /**
      * Seed the application's database.
      */
     public function run(): void
     {
-        $user = \App\Models\User::factory()->create([
+
+        $organizer = \App\Models\User::factory()->create([
             'name' => 'Dennis Schwerdt',
             'email' => 'ds@s-vtec.de',
             'password' => bcrypt('ChangeMe2023#'),
         ]);
-        $user->organizer()->create([
-            'user_id' => $user->id,
+        $organizer->organizer()->create([
+            'user_id' => $organizer->id,
             'name' => 'Schwerdt Veranstaltungstechnik',
             'address' => 'Tulpenweg 6',
             'zip' => '41517',
@@ -88,6 +93,71 @@ class DatabaseSeeder extends Seeder
                 Tag::create(['name' => $tagName]);
             }
         }
+
+        $venue = Venue::factory()->create([
+            'user_id' => $organizer->id,
+            'name' => '1. FC Grevenbroich-Süd',
+            'address' => 'Haupstr. 150',
+            'zip' => '41517',
+            'city' => 'Grevenbroich',
+            'country' => 'Deutschland',
+            'contact_name' => 'Dennis Schwerdt',
+            'contact_phone' => '+49 2181 819 99 99',
+            'contact_email' => 'info@s-vtec.de',
+            'notes' => 'Notes zur Location',
+        ]);
+
+        $event = \App\Models\Event::factory()->create([
+            'user_id' => $organizer->id,
+            'category_id' => 1,
+            'sub_category_id' => 1,
+            'venue_id' => $venue->id,
+            'title' => 'Süd Rock',
+            'description' => 'Süd Rock ist ein Rockfestival in Grevenbroich',
+            'entry_datetime' => '2022-07-08 17:00:00',
+            'start_datetime' => '2022-07-08 18:00:00',
+            'end_datetime' => '2022-07-08 23:00:00',
+            'status' => 1,
+            'website' => 'https://www.suedrock.de'
+        ]);
+
+        $ticket = \App\Models\Ticket::factory()->create([
+            'event_id' => $event->id,
+            'name' => 'VIP Ticket',
+            'quantity' => 100,
+        ]);
+
+        $ticket = \App\Models\Ticket::factory()->create([
+            'event_id' => $event->id,
+            'name' => 'Normales Ticket',
+            'quantity' => 500,
+        ]);
+
+        $ticket = \App\Models\Ticket::factory()->create([
+            'event_id' => $event->id,
+            'name' => 'Senioren Ticket',
+            'quantity' => 500,
+        ]);
+
+        $ticket = \App\Models\Ticket::factory()->create([
+            'event_id' => $event->id,
+            'name' => 'Kinder Ticket',
+            'quantity' => 500,
+        ]);
+
+        $customer = \App\Models\User::factory()->create([
+            'name' => 'Björn End',
+            'email' => 'bjoern@endmail.de',
+            'password' => bcrypt('ChangeMe2023#'),
+        ]);
+        $customer->customer()->create([
+            'user_id' => $customer->id,
+            'address' => 'Briedestraße 80',
+            'zip' => '40599',
+            'city' => 'Düsseldorf',
+            'country' => 'Deutschland',
+            'phone' => '+49 173 45 22 65 2',
+        ]);
 
     }
 }

@@ -48,9 +48,19 @@ class User extends Authenticatable
         return $this->hasOne(Organizer::class);
     }
 
+    public function customer()
+    {
+        return $this->hasOne(Customer::class);
+    }
+
     public function isOrganizer()
     {
         return $this->organizer != null;
+    }
+
+    public function isCustomer()
+    {
+        return $this->customer != null;
     }
 
     public function venues()
@@ -61,5 +71,10 @@ class User extends Authenticatable
     public function events()
     {
         return $this->hasMany(Event::class);
+    }
+
+    public function purchases()
+    {
+        return $this->hasMany(Purchase::class);
     }
 }

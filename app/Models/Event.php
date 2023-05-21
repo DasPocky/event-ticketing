@@ -48,4 +48,14 @@ class Event extends Model
     {
         return $this->belongsToMany(Tag::class);
     }
+
+    public function tickets()
+    {
+        return $this->hasMany(Ticket::class);
+    }
+
+    public function purchases()
+    {
+        return $this->hasManyThrough(Purchase::class, Ticket::class);
+    }
 }

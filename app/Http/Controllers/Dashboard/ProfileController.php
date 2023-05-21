@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use App\Http\Requests\CustomerUpdateRequest;
 
 class ProfileController extends Controller
 {
@@ -17,8 +18,21 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): View
     {
+        $user = $request->user();
+        if (!$user->customer) {
+            // Erstellen Sie ein neues Customer-Objekt und speichern Sie es in der Datenbank
+            $customer = new \App\Models\Customer();
+            $customer->user_id = $user->id;
+            $customer->save();
+
+            // Weisen Sie das neu erstellte Customer-Objekt dem Benutzer zu
+            $user->customer = $customer;
+        }
+
+
         return view('dashboard.profile.edit', [
             'user' => $request->user(),
+            'customer' => $request->user()->customer,
         ]);
     }
 
@@ -36,6 +50,15 @@ class ProfileController extends Controller
         $request->user()->save();
 
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
+    }
+
+    public function updateCustomer(CustomerUpdateRequest $request): RedirectResponse
+    {
+        $customer = $request->user()->customer;
+        $customer->fill($request->validated());
+        $customer->save();
+
+        return Redirect::route('home');
     }
 
     /**

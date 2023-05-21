@@ -41,7 +41,7 @@
             @foreach($events as $event)
                 <div class="w-full md:w-1/3 xl:w-1/4 p-6 flex flex-col">
                     <a href="#">
-                        <img class="hover:grow hover:shadow-lg" src="{{ $event->image }}">
+                        <img class="hover:grow hover:shadow-lg" src="{{ asset('storage/' . $event->image) }}">
                         <div class="pt-3 flex items-center justify-between">
                             <p class="">{{ $event->title }}</p>
                             <svg class="h-6 w-6 fill-current text-gray-500 hover:text-black" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -50,6 +50,29 @@
                         </div>
                         <p class="pt-1 text-gray-900">{{ $event->start_datetime }}</p>
                     </a>
+                    <div class="flex flex-col text-sm">
+                        @foreach($event->tickets as $ticket)
+                            <div class="flex flex-row justify-between">
+                            <div>{{ $ticket->name }}</div>
+                            <div>{{ $ticket->price }} €</div>
+                            @if($ticket->quantity == $ticket->quantity_sold)
+                                <p>AUSVERKAUFT</p>
+                            @else
+                                <p>{{ $ticket->quantity - $ticket->quantity_sold }} / {{ $ticket->quantity }}</p>
+                            @endif
+                            </div>
+                        @endforeach
+                        <hr>
+                        <!-- Wenn alle Tickets ausverkauft sind, zeige "AUSVERKAUFT" an -->
+                        @if($event->tickets->sum('quantity') == $event->tickets->sum('quantity_sold'))
+                            <p>AUSVERKAUFT</p>
+                        @else
+                            <a href="{{ route('purchases.create', ['event' => $event->id]) }}">
+                                Tickets Kaufen
+                            </a>
+                        @endif
+
+                    </div>
                 </div>
             @endforeach
 
