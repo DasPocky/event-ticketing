@@ -19,11 +19,11 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="bg-white text-gray-600 work-sans leading-normal text-base tracking-normal">
+<body class="bg-white text-gray-600 work-sans leading-normal text-base tracking-normal flex flex-col min-h-screen">
 
 <!--Nav-->
 <nav id="header" class="w-full z-30 top-0 py-1" x-data="{ open: false }">
-    <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 px-6 py-3">
+    <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 px-6 pt-3">
 
         <label for="menu-toggle" class="cursor-pointer md:hidden block" @click="open = !open">
             <svg class="fill-current text-gray-900" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
@@ -147,33 +147,26 @@
     </div>
 </nav>
 
-<main>
+<main class="flex flex-col flex-grow">
     {{ $slot }}
 </main>
 
 <!-- Footer -->
-<footer class="container mx-auto bg-white py-8 border-t border-gray-400">
-    <div class="container flex px-3 py-8 ">
-        <div class="w-full mx-auto flex flex-wrap">
-            <div class="flex w-full lg:w-1/2 ">
-                <div class="px-3 md:px-0">
-                    <h3 class="font-bold text-gray-900">About</h3>
-                    <p class="py-4">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vel mi ut felis tempus commodo nec id erat. Suspendisse consectetur dapibus velit ut lacinia.
-                    </p>
-                </div>
-            </div>
-            <div class="flex w-full lg:w-1/2 lg:justify-end lg:text-right">
-                <div class="px-3 md:px-0">
-                    <h3 class="font-bold text-gray-900">Social</h3>
-                    <ul class="list-reset items-center pt-3">
-                        <li>
-                            <a class="inline-block no-underline hover:text-black hover:underline py-1" href="#">Add social links</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+<footer class="container mx-auto bg-white border-t border-gray-400">
+    <div class="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
+      <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2023 <a href="https://www.end-schwerdt.de/" class="hover:underline">End & Schwerdt Event-IT GbR</a>. All Rights Reserved.
+    </span>
+        <ul class="flex flex-wrap items-center mt-3 text-sm font-medium text-gray-500 dark:text-gray-400 sm:mt-0">
+            <li>
+                <a href="#" class="mr-4 hover:underline md:mr-6">Kontakt</a>
+            </li>
+            <li>
+                <a href="#" class="mr-4 hover:underline md:mr-6">Datenschutz</a>
+            </li>
+            <li>
+                <a href="#" class="hover:underline">Impressum</a>
+            </li>
+        </ul>
     </div>
 </footer>
 

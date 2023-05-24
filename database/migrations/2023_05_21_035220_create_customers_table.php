@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('city')->nullable();
             $table->string('country')->nullable();
             $table->string('phone')->nullable();
+            $table->string('stripe_id')->nullable();
             $table->timestamps();
         });
     }

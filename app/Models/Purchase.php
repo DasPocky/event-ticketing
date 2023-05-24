@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\PaymentStatusEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -14,6 +15,15 @@ class Purchase extends Model
         'ticket_id',
         'event_id',
         'quantity',
+        'payment_status',
+        'session_id',
+        'payment_intent'
+    ];
+
+    protected $casts = [
+
+        'payment_status' => PaymentStatusEnum::class
+
     ];
 
     public function user()
@@ -30,4 +40,7 @@ class Purchase extends Model
     {
         return $this->belongsTo(Event::class);
     }
+
+
+
 }

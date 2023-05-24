@@ -81,4 +81,36 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
+
+    public function upgradeOrganizer(Request $request)
+    {
+
+        $user = $request->user();
+        if (!$user->organizer) {
+            // Erstellen Sie ein neues Organizer-Objekt und speichern Sie es in der Datenbank
+            $organizer = new \App\Models\Organizer();
+            $organizer->user_id = $user->id;
+            $organizer->name = $request->name;
+            $organizer->address = $request->address;
+            $organizer->zip = $request->zip;
+            $organizer->city = $request->city;
+            $organizer->country = $request->country;
+            $organizer->email = $request->email;
+            $organizer->phone = $request->phone;
+            $organizer->website = $request->website;
+            $organizer->save();
+
+            // Weisen Sie das neu erstellte Organizer-Objekt dem Benutzer zu
+            $user->organizer = $organizer;
+
+            // Lösche das Customer-Objekt
+            if ($user->customer) {
+                $user->customer->delete();
+            }
+
+            return Redirect::route('organizer.profile.edit')->with('success', __('Your account has been successfully upgraded to an organizer account.'));
+
+        }
+
+    }
 }

@@ -22,18 +22,25 @@
                 @csrf
 
                 @METHOD('PUT')
+
+                <!-- Ticket Group -->
+                <div class="px-6 py-4">
+                    <x-input-label for="ticket_group_id" :value="__('Ticket Group')" />
+
+                    <select id="ticket_group_id" name="ticket_group_id" required class="block mt-1 w-full">
+                        @foreach ($ticketGroups as $ticketGroup)
+                            <option value="{{ $ticketGroup->id }}" {{ $ticket->ticket_group_id == $ticketGroup->id ? 'selected' : '' }}>{{ $ticketGroup->name }}</option>
+                        @endforeach
+                    </select>
+
+                    <x-input-error :messages="$errors->get('ticket_group_id')" class="mt-2" />
+                </div>
+
                 <!-- Name -->
                 <div class="px-6 py-4">
                     <x-input-label for="name" :value="__('Name')" />
                     <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" value="{{ $ticket->name }}" required autofocus />
                     <x-input-error :messages="$errors->get('name')" class="mt-2" />
-                </div>
-
-                <!-- Quantity -->
-                <div class="px-6 py-4">
-                    <x-input-label for="quantity" :value="__('Quantity')" />
-                    <x-text-input id="quantity" class="block mt-1 w-full" type="text" name="quantity" value="{{ $ticket->quantity }}" required autofocus />
-                    <x-input-error :messages="$errors->get('quantity')" class="mt-2" />
                 </div>
 
                 <!-- Price -->

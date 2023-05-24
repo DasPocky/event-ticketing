@@ -1,31 +1,42 @@
 <x-guest-layout>
-    <div class="min-h-screen flex items-center justify-center bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
-        <div class="max-w-md w-full">
-            <div>
-                <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
-                    {{ $event->title }} - Tickets kaufen
-                </h2>
-            </div>
-            <form class="mt-8 space-y-6" action="{{ route('purchases.store', $event) }}" method="POST">
-                @csrf
-                @foreach($tickets as $ticket)
-                    <div>
-                        <div class="mt-1">
-                            <h2 class="text-lg font-semibold text-gray-700">{{ $ticket->name }}</h2>
-                            <label for="quantity[{{ $ticket->id }}]" class="sr-only">Anzahl</label>
-                            <input type="number" id="quantity[{{ $ticket->id }}]" name="tickets[{{ $ticket->id }}]" min="0" max="{{ $ticket->quantity - $ticket->quantity_sold }}" value="0" {{ $ticket->quantity_sold == $ticket->quantity ? 'disabled' : '' }} class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm">
-                            @if ($ticket->quantity_sold == $ticket->quantity)
-                                <span class="text-red-500 text-sm">Ausverkauft</span>
-                            @endif
+    <div class="container mx-auto px-6 my-auto">
+        <div class="flex justify-center w-full">
+            <div class="max-w-full w-full flex flex-col md:flex-row mb-5 md:space-y-0 md:space-x-6">
+                <div class="relative md:w-3/5">
+                    <img class="hover:grow hover:shadow-lg rounded-lg w-full h-full object-cover" src="{{ asset('storage/' . $event->image) }}">
+                    <div class="absolute top-0 left-0 bg-white bg-opacity-75 text-black text-xl font-semibold text-center uppercase p-4 w-full rounded-t-lg">{{ $event->title }}</div>
+                </div>
+                <form class="md:w-2/5 mt-4 md:mt-0" action="{{ route('purchases.store', $event) }}" method="POST">
+                    @csrf
+                    @if ($errors->any())
+                        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
+                            <strong class="font-bold">Fehler:</strong>
+                            <ul class="list-disc list-inside">
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
                         </div>
-                    </div>
-                @endforeach
-                <div>
-                    <button type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    @endif
+                    @foreach($groupedTickets as $ticketGroupId => $ticketsInGroup)
+                        <h3 class="text-lg font-semibold text-gray-700 py-1">
+                            {{ $ticketsInGroup->first()->ticketGroup ? $ticketsInGroup->first()->ticketGroup->name : 'No Group' }}
+                        </h3>
+                        @foreach($ticketsInGroup as $ticket)
+                            <div class="flex justify-between items-center font-thin py-1">
+                                <div class="text-sm text-gray-800 flex-grow">{{ $ticket->name }}</div>
+                                <div class="text-sm text-gray-800 text-right w-20 mr-4">{{ $ticket->price }} €</div>
+                                <input type="number" id="quantity[{{ $ticket->id }}]" name="tickets[{{ $ticket->id }}]" min="0" max="{{ $ticket->ticketGroup->quantity_total - $ticket->quantity_sold }}" value="0" {{ $ticket->ticketGroup->quantity_sold == $ticket->ticketGroup->quantity_total ? 'disabled' : '' }} class="w-14 appearance-none rounded-none relative px-2 py-1 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm">
+                            </div>
+                        @endforeach
+                    @endforeach
+                    <hr class="border-gray-800 my-4">
+                    <button type="submit" class="inline-flex items-center px-2 py-1 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150">
                         Ticket(s) kaufen
                     </button>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
 </x-guest-layout>
+

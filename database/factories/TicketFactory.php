@@ -17,15 +17,9 @@ class TicketFactory extends Factory
     public function definition(): array
     {
         return [
-            //        'event_id',
-            //        'name',
-            //        'quantity',
-            //        'quantity_sold',
-            //        'price',
 
             'event_id' => null,
             'name' => null,
-            'quantity' => $this->faker->numberBetween(1, 100),
             'quantity_sold' => 0,
             'price' => $this->faker->numberBetween(5, 200),
         ];

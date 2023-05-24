@@ -15,9 +15,10 @@ class EventController extends Controller
     // Anzeigen aller Events für den authentifizierten Benutzer
     public function index()
     {
-        $events = auth()->user()->events;
+        $events = auth()->user()->events()->with('tickets.ticketGroup')->get();
         return view('organizer.events.index', compact('events'));
     }
+
 
     // Anzeigen der Erstellungsseite für ein neues Event
     public function create()

@@ -18,7 +18,8 @@ class Organizer extends Model
         'country',
         'email',
         'phone',
-        'website'
+        'website',
+        'stripe_account_id'
     ];
 
     public function user()

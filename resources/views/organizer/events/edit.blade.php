@@ -116,7 +116,7 @@
                 <!-- Submit Button -->
                 <div class="px-6 py-4 bg-gray-50 text-right">
                     <x-primary-button href="{{ route('organizer.venues.create') }}">
-                        {{ __('Add Venue') }}
+                        {{ __('Save') }}
                     </x-primary-button>
                 </div>
             </form>

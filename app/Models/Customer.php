@@ -15,7 +15,8 @@ class Customer extends Model
         'zip',
         'city',
         'country',
-        'phone'
+        'phone',
+        'stripe_id',
     ];
 
     public function user()

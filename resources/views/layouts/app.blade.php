@@ -40,6 +40,10 @@
                                   :active="request()->routeIs('dashboard.index')">
                 {{ __('Home') }}
             </x-app-nav-link>
+            <x-app-nav-link :href="route('dashboard.purchases.index')"
+                                  :active="request()->routeIs('dashboard.purchases.index')">
+                {{ __('Purchases') }}
+            </x-app-nav-link>
         </nav>
     </div>
     <div class="w-full">

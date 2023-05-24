@@ -24,6 +24,12 @@ class Event extends Model
         'website'
     ];
 
+    protected $dates = [
+        'entry_datetime',
+        'start_datetime',
+        'end_datetime'
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);
