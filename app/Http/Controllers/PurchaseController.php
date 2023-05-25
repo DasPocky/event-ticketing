@@ -116,7 +116,7 @@ class PurchaseController extends Controller
 
         $checkoutSession = \Stripe\Checkout\Session::create([
             'customer' => $stripe_customer->id,
-            'payment_method_types' => ['card', 'sepa_debit'],
+            'payment_method_types' => ['card', 'sepa_debit', 'customer_balance', 'giropay', 'klarna', 'link', 'paypal', 'sofort'],
             'line_items' => $line_items,
             'mode' => 'payment',
             'success_url' => route('purchases.success').'?session_id={CHECKOUT_SESSION_ID}',
@@ -125,6 +125,7 @@ class PurchaseController extends Controller
                 'application_fee_amount' => 15, // Gebühr in Cent
                 'transfer_data' => [
                     'destination' => $organizer->stripe_account_id,
+
                 ],
             ],
         ]);

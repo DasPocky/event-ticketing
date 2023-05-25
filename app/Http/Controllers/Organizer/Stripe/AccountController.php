@@ -56,7 +56,14 @@ class AccountController extends Controller
             ],
             'capabilities' => [
                 'card_payments' => ['requested' => true],
+                'sepa_debit_payments' => ['requested' => true],
+                'sofort_payments' => ['requested' => true],
+                'link_payments' => ['requested' => true],
+                'giropay_payments' => ['requested' => true],
                 'transfers' => ['requested' => true],
+                'klarna_payments' => ['requested' => true],
+                'bank_transfer_payments' => ['requested' => true],
+                'bancontact_payments' => ['requested' => true],
             ],
         ]);
 

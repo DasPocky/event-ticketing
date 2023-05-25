@@ -37,10 +37,14 @@ Route::middleware(['auth', 'organizer'])->name('organizer.')->prefix('organizer'
     });
 
     Route::get('/', [\App\Http\Controllers\Organizer\OrganizerController::class, 'index'])->name('index');
-    Route::resource('venues', \App\Http\Controllers\Organizer\VenueController::class);
-    Route::resource('events', \App\Http\Controllers\Organizer\EventController::class);
-    Route::resource('event.tickets', \App\Http\Controllers\Organizer\TicketController::class);
-    Route::resource('event.ticket-groups', \App\Http\Controllers\Organizer\TicketGroupController::class);
+
+    Route::middleware('check.stripe.connected')->group(function () {
+        Route::resource('venues', \App\Http\Controllers\Organizer\VenueController::class);
+        Route::resource('events', \App\Http\Controllers\Organizer\EventController::class);
+        Route::resource('event.tickets', \App\Http\Controllers\Organizer\TicketController::class);
+        Route::resource('event.ticket-groups', \App\Http\Controllers\Organizer\TicketGroupController::class);
+
+    });
 
 });
 

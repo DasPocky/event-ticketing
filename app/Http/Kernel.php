@@ -64,5 +64,6 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'organizer' => \App\Http\Middleware\Organizer::class,
+        'check.stripe.connected' => \App\Http\Middleware\CheckStripeConnected::class,
     ];
 }
