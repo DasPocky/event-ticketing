@@ -11,11 +11,16 @@ class PurchaseController extends Controller
 {
     public function index()
     {
-        $purchases = Purchase::where('user_id', Auth::user()->id)
-            ->with(['ticket.event'])  // Veränderte Zeile
-            ->get()
-            ->groupBy('ticket.event.title');  // Veränderte Zeile
+        if (Auth::check()) {
+            $purchases = Purchase::where('user_id', Auth::id())
+                ->with(['ticket.event'])
+                ->get()
+                ->groupBy('ticket.event.title');
 
-        return view('dashboard.purchases.index', compact('purchases'));
+            return view('dashboard.purchases.index', compact('purchases'));
+        }
+
+        return redirect()->route('login'); // oder jede andere geeignete Aktion
     }
+
 }
