@@ -5,6 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property \App\Models\User $user
+ * @property \App\Models\Category $category
+ * @property \App\Models\SubCategory $subCategory
+ * @property \App\Models\Venue $venue
+ * @property \Illuminate\Database\Eloquent\Collection|\App\Models\Tag[] $tags
+ * @property \Illuminate\Database\Eloquent\Collection|\App\Models\Ticket[] $tickets
+ * @property \Illuminate\Database\Eloquent\Collection|\App\Models\Purchase[] $purchases
+ */
 class Event extends Model
 {
     use HasFactory;

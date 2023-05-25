@@ -8,6 +8,9 @@
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
         @foreach($events as $event)
+            @php
+                $groupedTickets = $event->tickets->groupBy('ticket_group_id');
+            @endphp
             <div class="bg-white rounded-lg overflow-hidden shadow-md dark:bg-gray-800 h-full flex flex-col">
                 <div class="flex-grow">
                     <div class="p-2 bg-gray-300">
@@ -55,19 +58,23 @@
                             </div>
                         </div>
                     </div>
+                    <div class="p-2 flex flex-row justify-between ml-2 mr-2 text-gray-700 dark:text-white border-b border-b-gray-400">
+                        <x-primary-button-link size="sm" href="{{route('organizer.event.ticket-groups.create', $event)}}">Add Tickt-Group</x-primary-button-link>
+                        @if ($groupedTickets->count() === 0)
+                            <x-primary-button-link size="sm" class="opacity-50 cursor-not-allowed" disabled>Add Ticket</x-primary-button-link>
+                        @else
+                            <x-primary-button-link size="sm" href="{{route('organizer.event.tickets.create', $event)}}">Add Ticket</x-primary-button-link>
+                        @endif
+                    </div>
                     <div class="p-2">
-                        @php
-                            $groupedTickets = $event->tickets->groupBy('ticket_group_id');
-                        @endphp
                         @if ($groupedTickets->count() === 0)
                             <p class="font-bold text-lg">Keine Ticket-Groups vorhanden</p>
-                            <p><a href="{{ route('organizer.event.ticket-groups.create', $event) }}" class="px-3 py-1 rounded text-blue-600 bg-blue-100 hover:underline dark:text-blue-500">Ticket-Group hinzufügen</a></p>
                         @else
                             @foreach($groupedTickets as $ticketGroupId => $tickets)
                                 @if($tickets->first()->ticketGroup)
                                     <h4 class="font-semibold text-sm bg-red-200 pl-2 uppercase">{{$tickets->first()->ticketGroup->name}}</h4>
                                     @foreach($tickets as $ticket)
-                                        <div class="flex justify-between items-center font-thin text-xs pl-2 pt-1 pb-1 uppercase grid grid-cols-3">
+                                        <div class="flex justify-between items-center font-thin text-xs px-2 py-1 uppercase grid grid-cols-3">
                                             <span class="font-bold col-span-1">{{$ticket->name}}</span>
                                             <span class="text-sm col-span-1 text-right">{{$ticket->price}} €</span>
                                             <form class="flex flex-row justify-end items-center col-span-1" action="{{route('organizer.event.tickets.destroy', ['event' => $event->id, 'ticket' => $ticket->id])}}" method="POST" onsubmit="return confirm('Wirklich löschen?')">
@@ -93,15 +100,15 @@
                     </div>
                 </div>
                 <div class="px-4 pt-3 pb-4 border-t border-gray-300 bg-gray-100 dark:border-gray-700 dark:bg-gray-800">
-                    <div class="flex justify-between">
+                    <div class="flex flex-row justify-between">
                         <div>
-                            <x-primary-button-link href="{{route('organizer.events.show', $event)}}">Details</x-primary-button-link>
-                            <x-primary-button-link href="{{route('organizer.events.edit', $event)}}">Edit</x-primary-button-link>
-                            <x-primary-button-link href="{{route('organizer.events.show', $event)}}">Add Tickt</x-primary-button-link></div>
+                            <x-primary-button-link size="sm" href="{{route('organizer.events.show', $event)}}">Details</x-primary-button-link>
+                            <x-primary-button-link size="sm" href="{{route('organizer.events.edit', $event)}}">Edit</x-primary-button-link>
+                        </div>
                         <form class="inline-block ml-2" action="{{route('organizer.events.destroy', $event)}}" method="POST" onsubmit="return confirm('Wirklich löschen?')">
                             @csrf
                             @method('DELETE')
-                            <x-primary-button>Delete</x-primary-button>
+                            <x-primary-button size="sm">Delete</x-primary-button>
                         </form>
                     </div>
                 </div>

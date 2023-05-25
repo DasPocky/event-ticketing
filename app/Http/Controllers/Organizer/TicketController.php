@@ -12,7 +12,8 @@ class TicketController extends Controller
 {
     public function create(Event $event)
     {
-        $ticketGroups = TicketGroup::all(); // Assuming you have a TicketGroup model.
+        // Hole alle Ticket-Gruppen des Events
+        $ticketGroups = TicketGroup::where('event_id', $event->id)->get();
         return view('organizer.tickets.create', compact('event', 'ticketGroups'));
     }
 

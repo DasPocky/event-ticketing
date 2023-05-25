@@ -5,6 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property \App\Models\User $user
+ * @property \Illuminate\Database\Eloquent\Collection|\App\Models\Event[] $events
+ */
 class Organizer extends Model
 {
     use HasFactory;

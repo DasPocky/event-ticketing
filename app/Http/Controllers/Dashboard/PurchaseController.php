@@ -12,9 +12,9 @@ class PurchaseController extends Controller
     public function index()
     {
         $purchases = Purchase::where('user_id', Auth::user()->id)
-            ->with('event')
+            ->with(['ticket.event'])  // Veränderte Zeile
             ->get()
-            ->groupBy('event.title');
+            ->groupBy('ticket.event.title');  // Veränderte Zeile
 
         return view('dashboard.purchases.index', compact('purchases'));
     }

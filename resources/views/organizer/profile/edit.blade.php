@@ -49,11 +49,11 @@
                     @if(empty($organizer->stripe_account_id))
                         @include('organizer.profile.partials.stripe.account-create')
                     @else
-                        <p>Sie haben bereits ein Stripe-Konto verknüpft.</p>
-                        <x-primary-button-link href="{{ route('organizer.profile.stripe.account.dashboard', $user) }}">
+                        <p>{{ __('You have already successfully connected your account with Stripe.') }}</p>
+                        <x-primary-button-link href="{{ route('organizer.stripe.account.dashboard', $user) }}">
                             Zum Stripe Dashboard
                         </x-primary-button-link>
-                        <x-primary-button-link href="{{ route('organizer.profile.stripe.account.delete', $user) }}">
+                        <x-primary-button-link href="{{ route('organizer.stripe.account.delete', $user) }}">
                             Stripe Konto Löschen
                         </x-primary-button-link>
                     @endif

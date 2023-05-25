@@ -11,7 +11,7 @@ class OrganizerController extends Controller
     public function index()
     {
         // Zähle alle Venues zusammen und gib sie an die View weiter
-        $venues = Venue::all()->count();
+        $venues = Venue::count();
         return view('organizer.index', compact('venues'));
     }
 }

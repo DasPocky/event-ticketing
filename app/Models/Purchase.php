@@ -6,6 +6,11 @@ use App\Enums\PaymentStatusEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property \App\Models\User $user
+ * @property \App\Models\Ticket $ticket
+ * @property \App\Models\Event $event
+ */
 class Purchase extends Model
 {
     use HasFactory;
@@ -40,7 +45,5 @@ class Purchase extends Model
     {
         return $this->belongsTo(Event::class);
     }
-
-
 
 }

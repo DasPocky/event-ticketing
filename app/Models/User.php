@@ -8,6 +8,14 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
+/**
+ * @property \App\Models\Customer|null $customer
+ * @property \App\Models\Organizer|null $organizer
+ * @property \Illuminate\Database\Eloquent\Collection|\App\Models\Venue[] $venues
+ * @property \Illuminate\Database\Eloquent\Collection|\App\Models\Event[] $events
+ * @property \Illuminate\Database\Eloquent\Collection|\App\Models\Purchase[] $purchases
+ */
+
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;

@@ -24,16 +24,17 @@ Route::middleware(['auth', 'organizer'])->name('organizer.')->prefix('organizer'
     Route::patch('/profile/organizer', [\App\Http\Controllers\Organizer\ProfileController::class, 'updateOrganizer'])->name('profile.updateOrganizer');
     Route::delete('/profile', [\App\Http\Controllers\Organizer\ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::get('/profile/stripe/refresh', [\App\Http\Controllers\Organizer\ProfileController::class, 'StripeRefresh'])->name('profile.stripe.refresh');
-    Route::get('/profile/stripe/return', [\App\Http\Controllers\Organizer\ProfileController::class, 'StripeReturn'])->name('profile.stripe.return');
+    Route::controller(\App\Http\Controllers\Organizer\Stripe\AccountController::class)->name('stripe.')->prefix('stripe')->group(function () {
 
-    Route::get('/profile/stripe/account/create', [\App\Http\Controllers\Organizer\ProfileController::class, 'StripeAccountCreate'])->name('profile.stripe.account.create');
-    // TEST
-    // ===
-    Route::get('/profile/stripe/account/{user_id}/dashboard', [\App\Http\Controllers\Organizer\ProfileController::class, 'StripeAccountDashboard'])->name('profile.stripe.account.dashboard');
-    Route::get('/profile/stripe/account/{user_id}/delete', [\App\Http\Controllers\Organizer\ProfileController::class, 'StripeAccountDelete'])->name('profile.stripe.account.delete');
-    // ===
-    // TEST
+        Route::get('/refresh', [\App\Http\Controllers\Organizer\Stripe\AccountController::class, 'refresh'])->name('refresh');
+        Route::get('return', [\App\Http\Controllers\Organizer\Stripe\AccountController::class, 'return'])->name('return');
+
+        Route::get('/account/create', [\App\Http\Controllers\Organizer\Stripe\AccountController::class, 'create'])->name('account.create');
+
+        Route::get('/account/dashboard', [\App\Http\Controllers\Organizer\Stripe\AccountController::class, 'dashboard'])->name('account.dashboard');
+        Route::get('/account/delete', [\App\Http\Controllers\Organizer\Stripe\AccountController::class, 'delete'])->name('account.delete');
+
+    });
 
     Route::get('/', [\App\Http\Controllers\Organizer\OrganizerController::class, 'index'])->name('index');
     Route::resource('venues', \App\Http\Controllers\Organizer\VenueController::class);

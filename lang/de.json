@@ -2,31 +2,35 @@
     "Venues": "Locations",
     "Venue": "Location",
     "Add Venue": "Location hinzufügen",
-    "Save": "Speichern",
-    "Delete": "Löschen",
-    "Edit": "Bearbeiten",
+
     "Events": "Veranstaltungen",
     "Event": "Veranstaltung",
     "Add Event": "Veranstaltung hinzufügen",
-    "Choose Category": "Kategorie wählen",
-    "Choose Sub-Category": "Unterkategorie wählen",
-    "Title": "Titel",
-    "Description": "Beschreibung",
+
     "Category" : "Kategorie",
     "Categories" : "Kategorien",
     "Sub-Category" : "Unterkategorie",
     "Sub-Categories" : "Unterkategorien",
+    "Choose Category": "Kategorie wählen",
+    "Choose Sub-Category": "Unterkategorie wählen",
+
+    "Title": "Titel",
+    "Description": "Beschreibung",
     "Entry" : "Einlass",
     "Start" : "Beginn",
     "End" : "Ende",
+
     "Your Purchase" : "Ihr Kauf",
     "Your Purchases" : "Ihre Käufe",
     "Purchases" : "Käufe",
     "Purchase" : "Kauf",
+
     "Profile Information" : "Profil Informationen",
+    "Update your account's profile information and email address.": "Aktuallsieren Sie hier Ihren Namen und Ihre E-Mail Adresse",
+
     "Customer Information": "Persönliche Informationen",
     "Update your customer information.": "Aktuallsieren Sie hier Ihre Persönlichen Informationen",
-    "Update your account's profile information and email address.": "Aktuallsieren Sie hier Ihren Namen und Ihre E-Mail Adresse",
+
     "Name": "Name",
     "Email": "E-Mail",
     "Address": "Adresse",
@@ -34,16 +38,29 @@
     "City": "Stadt",
     "Country": "Land",
     "Phone": "Telefon",
+
     "Update Password": "Passwort ändern",
     "Ensure your account is using a long, random password to stay secure.": "Stellen Sie sicher, dass Ihr Konto ein langes, zufälliges Passwort verwendet, um sicher zu sein.",
     "Current Password": "Aktuelles Passwort",
     "New Password": "Neues Passwort",
     "Confirm Password": "Bestätigen Sie Ihr Passwort",
+
     "Delete Account": "Konto löschen",
     "Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.": "Nach der Löschung Ihres Kontos werden alle Ressourcen und Daten dauerhaft gelöscht. Bevor Sie Ihr Konto löschen, laden Sie bitte alle Daten oder Informationen herunter, die Sie aufbewahren möchten.",
+
     "Upgrade your account to an organizer account. Please note, it is not possible to switch back to a user account after the upgrade!": "Stufen Sie hier Ihr Konto auf ein Veranstalter-Konto hoch. Bitte beachten Sie, dass ein Wechsel zurück zu einem Benutzer-Konto nach der hochstufung nicht mehr möglich ist!",
     "Your account has been successfully upgraded to an organizer account.": "Ihr Konto wurde erfolgreich zu einem Veranstalter-Konto hochgestuft.",
-    "Organizer Information": "Veranstalter Informationen",
-    "Update your organizer information.": "Aktualisieren Sie Ihre Veranstalter Informationen."
 
+    "Upgrade to Organizer": "Zum Veranstalter hochstufen",
+    "Organizer Information": "Veranstalter Informationen",
+    "Update your organizer information.": "Aktualisieren Sie Ihre Veranstalter Informationen.",
+
+    "Connect Stripe Account": "Stripe Konto verbinden",
+    "Connect your account with the payment service provider Stripe to manage locations, events and tickets.": "Verbinden Sie Ihr Konto mit dem Zahlungsdienstleister Stripe um Locations, Veranstaltungen und Tickets zu Verwalten.",
+    "You have already successfully connected your account with Stripe.": "Sie haben Ihr Konto bereits erfolgreich mit Stripe verbunden.",
+    "Connect": "Verbinden",
+
+    "Save": "Speichern",
+    "Delete": "Löschen",
+    "Edit": "Bearbeiten"
 }
